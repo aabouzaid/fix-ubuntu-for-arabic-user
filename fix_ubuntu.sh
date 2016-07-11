@@ -12,12 +12,16 @@ recommendedArabicFont="KacstOne"
 
 # 
 runSudo () {
-  if [[ $(sudo -v -n| grep -q 'sudo: a password is required') ]]; then
-    zenity --password | sudo -S "${@}"
-  else
+  sudoExitStatus=$(sudo -v -n; echo $?)
+  if [[ ${sudoExitStatus} -eq 0 ]]; then
     sudo -S "${@}"
+  else
+    zenity --password | sudo -S "${@}"
   fi
 }
+
+#
+runSudo true
 
 # Zenity dialog (info, message, question ... etc).
 showZenityDialog () {
