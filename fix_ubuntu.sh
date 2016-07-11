@@ -8,7 +8,7 @@ recommendedArabicFont="KacstOne"
 
 
 #########################################
-# Main.
+# Main funcutions.
 
 # 
 runSudo () {
@@ -20,8 +20,6 @@ runSudo () {
   fi
 }
 
-#
-runSudo true
 
 # Zenity dialog (info, message, question ... etc).
 showZenityDialog () {
@@ -91,6 +89,10 @@ source "./functions/setSystemArabicFont.sh"
 #########################################
 # Run.
 
+# Run sudo for first time.
+runSudo true
+
+# 
 while :
 do
   # Run main dialog. 

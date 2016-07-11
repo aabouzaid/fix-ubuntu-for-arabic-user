@@ -6,8 +6,8 @@ setSystemArabicFont () {
     xmlArabicFile="69-language-selector-ar.conf"
     xmlArabicPath="/etc/fonts/conf.avail/${xmlArabicFile}"
     copyConfigFile () {
-      runSudo cp -a "./files/${xmlArabicFile}" /etc/fonts/conf.avail/
-      runSudo ln -s "${xmlArabicPath}" "/etc/fonts/conf.d/${xmlArabicFile}"
+      runSudo sed "s/SELECTED_ARABIC_FILE/${selectedArabicFont}/g" "./files/${xmlArabicFile}" > ${xmlArabicPath}
+      runSudo ln -sf "${xmlArabicPath}" "/etc/fonts/conf.d/${xmlArabicFile}"
     }
 
     #
