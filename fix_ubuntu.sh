@@ -71,8 +71,8 @@ selectArabicFont () {
 
   #
   origIFS=${IFS}; IFS=';'; 
-  read -ra fontsListArray <<< "${defaultArabicFont};${fontsList}"
-  IFS=${origIFS}
+  read -ra fontsListArray <<< "${defaultArabicFont};${fontsList}";
+  IFS="${origIFS}"
 
   #
   zenity --entry --title "Select Arabic font for system." --entry-text "${fontsListArray[@]}" --text "Please select Arabic font for ${action}"
@@ -81,31 +81,7 @@ selectArabicFont () {
 
 # Set system default Arabic font.
 #================================
-setSystemArabicFont () {
-  selectedArabicFont=$(selectArabicFont ${recommendedArabicFont})
-  if [[ -z ${selectedArabicFont} ]]; then
-    return
-  else
-    xmlArabicFile="69-language-selector-ar.conf"
-    xmlArabicPath="/etc/fonts/conf.avail/${xmlArabicFile}"
-    copyConfigFile () {
-      runSudo cp -a "./files/${xmlArabicFile}" /etc/fonts/conf.avail/
-      runSudo ln -s "${xmlArabicPath}" "/etc/fonts/conf.d/${xmlArabicFile}"
-    }
-
-    #
-    if [[ ! -f "${xmlArabicPath}" ]]; then
-      copyConfigFile
-    elif [[ -f "${xmlArabicPath}" ]]; then
-      showZenityDialog "question" "File already exists." "The file \"${xmlArabicFile}\" already exists, do you like to overwite it?"
-      if [[ $? -eq 0 ]]; then
-        copyConfigFile
-        check_exit_status
-      fi
-    fi
-  fi
-}
-
+source "./functions/setSystemArabicFont.sh"
 
 
 #########################################
