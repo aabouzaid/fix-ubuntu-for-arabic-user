@@ -31,7 +31,9 @@ showZenityDialog () {
 check_exit_status () {
   if [[ $? = 0 ]]; then
     showZenityDialog "info" "" "Done!"
-   else
+  elif [[ $? = 1 ]]; then
+    ${1}
+  else
     echo $(printf '=%.0s' {1..50}) >> ${logsFile}
     showZenityDialog "error" "" "Sorry! Unexpected error! Please check logs: ${logsFile}"
   fi
@@ -81,16 +83,25 @@ selectArabicFont () {
 #================================
 setSystemArabicFont () {
   selectedArabicFont=$(selectArabicFont ${recommendedArabicFont})
-  xmlArabicFile="69-language-selector-ar.conf"
-  xmlArabicPath="/etc/fonts/conf.avail/${xmlArabicFile}"
-  if [[ -f "${xmlArabicPath}" ]]; then
-    showZenityDialog "question" "File already exists." "The file ${xmlArabicFile} already exists, do you like to overwite it?"
-    if [[ $? -eq 0 ]]; then
+  if [[ -z ${selectedArabicFont} ]]; then
+    return
+  else
+    xmlArabicFile="69-language-selector-ar.conf"
+    xmlArabicPath="/etc/fonts/conf.avail/${xmlArabicFile}"
+    copyConfigFile () {
       runSudo cp -a "./files/${xmlArabicFile}" /etc/fonts/conf.avail/
       runSudo ln -s "${xmlArabicPath}" "/etc/fonts/conf.d/${xmlArabicFile}"
-      check_exit_status
-    else
-      mainDialog
+    }
+
+    #
+    if [[ ! -f "${xmlArabicPath}" ]]; then
+      copyConfigFile
+    elif [[ -f "${xmlArabicPath}" ]]; then
+      showZenityDialog "question" "File already exists." "The file \"${xmlArabicFile}\" already exists, do you like to overwite it?"
+      if [[ $? -eq 0 ]]; then
+        copyConfigFile
+        check_exit_status
+      fi
     fi
   fi
 }
