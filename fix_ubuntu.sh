@@ -31,10 +31,11 @@ showZenityDialog () {
 
 # Check exit status and return message in the case of success or fails.
 check_exit_status () {
+    runCmd=${1}
   if [[ $? = 0 ]]; then
     showZenityDialog "info" "" "Done!"
   elif [[ $? = 1 ]]; then
-    ${1}
+    ${runCmd}
   else
     echo $(printf '=%.0s' {1..50}) >> ${logsFile}
     showZenityDialog "error" "" "Sorry! Unexpected error! Please check logs: ${logsFile}"
@@ -51,7 +52,7 @@ firefoxArabicFont="Set default Firefox Arabic font."
 lamAlefConnect="Fix Lam-Alef connecting issue."
 geditArabicEncoding="Set gedit default Arabic encoding."
 totemArabicEncoding="Set Totem default Arabic encoding."
-lirebofficeRtlSupport="Enable RTL in LibreOffice."
+libreofficeArabicSupport="Enable RTL in LibreOffice."
 moreUsefulPackges="Install useful packges."
 
 
@@ -60,10 +61,10 @@ ${firefoxArabicFont}
 ${lamAlefConnect}
 ${geditArabicEncoding}
 ${totemArabicEncoding}
-${lirebofficeRtlSupport}
+${libreofficeArabicSupport}
 ${moreUsefulPackges}"
 
-# Convert 
+# Convert variables list to an array.
 IFS=$'\n'
 fixesArray=( $(printf 'FALSE \n%s\n' ${fixesList}) )
 unset IFS
@@ -76,6 +77,17 @@ mainDialog () {
     --title="What do you want to do?" \
     --column=" " --column="Action" "${fixesArray[@]}"
   )
+}
+
+
+#########################################
+# Fixes.
+
+
+# Fix Lam-Alef connecting issue.
+#===============================
+fixLamAlefIssue () {
+  runSudo im-config -n xim
 }
 
 
@@ -106,11 +118,9 @@ selectArabicFont () {
 source "./functions/setSystemArabicFont.sh"
 
 
-# Fix Lam-Alef connecting issue.
-#================================
-fixLamAlefIssue () {
-  runSudo im-config -n xim
-}
+# Enable RTL in LibreOffice and set Arabic locale.
+#=================================================
+source "./functions/libreofficeArabicSupport.sh"
 
 
 #########################################
