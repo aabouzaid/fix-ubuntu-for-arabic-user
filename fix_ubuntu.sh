@@ -97,6 +97,12 @@ selectArabicFont () {
 source "./functions/setSystemArabicFont.sh"
 
 
+# Fix Lam-Alef connecting issue.
+#================================
+fixLamAlefIssue () {
+  runSudo im-config -n xim
+}
+
 
 #########################################
 # Run.
