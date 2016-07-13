@@ -10,7 +10,8 @@ recommendedArabicFont="KacstOne"
 #########################################
 # Main funcutions.
 
-# 
+# Run with sudo.
+# If sudo session expired, will ask for password again with zenity password dialog.
 runSudo () {
   if $(sudo -v -n); then
     sudo -S "${@}"
@@ -41,16 +42,31 @@ check_exit_status () {
 }
 
 
+#########################################
+# Main dialog.
 
 # Fixes list.
-#=========================
-system_arabic_font="Set default system Arabic font."
-firefox_arabic_font="Set default Firefox Arabic font."
-lam_alef_connect="Fix Lam-Alef connecting issue."
-gedit_arabic_encoding="Set gedit default Arabic encoding."
-totem_arabic_encoding="Set Totem default Arabic encoding."
-lireboffice_rtl_support="Enable RTL in LibreOffice."
-more_useful_packges="Install useful packges."
+systemArabicFont="Set default system Arabic font."
+firefoxArabicFont="Set default Firefox Arabic font."
+lamAlefConnect="Fix Lam-Alef connecting issue."
+geditArabicEncoding="Set gedit default Arabic encoding."
+totemArabicEncoding="Set Totem default Arabic encoding."
+lirebofficeRtlSupport="Enable RTL in LibreOffice."
+moreUsefulPackges="Install useful packges."
+
+
+fixesList="${systemArabicFont}
+${firefoxArabicFont}
+${lamAlefConnect}
+${geditArabicEncoding}
+${totemArabicEncoding}
+${lirebofficeRtlSupport}
+${moreUsefulPackges}"
+
+# Convert 
+IFS=$'\n'
+fixesArray=( $(printf 'FALSE \n%s\n' ${fixesList}) )
+unset IFS
 
 # Main dialog.
 #=========================
@@ -58,14 +74,7 @@ mainDialog () {
   mainAction=$(
   zenity --list --radiolist \
     --title="What do you want to do?" \
-    --column=" " --column="Action" \
-      FALSE "${system_arabic_font}" \
-      FALSE "${firefox_arabic_font}" \
-      FALSE "${lam_alef_connect}" \
-      FALSE "${gedit_arabic_encoding}" \
-      FALSE "${totem_arabic_encoding}" \
-      FALSE "${lireboffice_rtl_support}" \
-      FALSE "${more_useful_packges}"
+    --column=" " --column="Action" "${fixesArray[@]}"
   )
 }
 
