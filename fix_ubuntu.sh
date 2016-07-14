@@ -70,6 +70,9 @@ do
     "Set default system Arabic font.")
       setSystemArabicFont
     ;;
+    "${libreofficeArabicSupport}")
+      libreofficeArabicSupport
+    ;;
     *)
       if [[ $? = -1 ]]; then
         showZenityDialog "error" "" "Sorry! Unexpected error!"
