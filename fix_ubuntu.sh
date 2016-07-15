@@ -1,7 +1,8 @@
 #! /bin/bash
 
-#########################################
+#---------------------------------------#
 # Main.
+#---------------------------------------#
 
 # Common variables.
 source "./vars/commonVars.sh"
@@ -13,8 +14,9 @@ source "./functions/commonFunctions.sh"
 source "./functions/mainDialog.sh"
 
 
-#########################################
+#---------------------------------------#
 # Fixes.
+#---------------------------------------#
 
 # Select an Arabic font.
 source "./functions/selectArabicFont.sh"
@@ -29,8 +31,9 @@ source "./functions/libreofficeArabicSupport.sh"
 source "./functions/fixLamAlefConnect.sh"
 
 
-#########################################
+#---------------------------------------#
 # Run.
+#---------------------------------------#
 
 # Run sudo for first time.
 if ! $(runSudo true); then
