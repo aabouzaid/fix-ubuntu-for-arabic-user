@@ -4,7 +4,7 @@
 # Vars
 
 # Common variables.
-source "./commonVars.sh"
+source "./vars/commonVars.sh"
 
 
 #########################################
