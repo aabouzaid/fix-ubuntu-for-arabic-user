@@ -1,36 +1,16 @@
 #! /bin/bash
 
 #########################################
-# Vars
+# Main.
 
 # Common variables.
 source "./vars/commonVars.sh"
 
-
-#########################################
-# Functions.
-
 # Common functions.
 source "./functions/commonFunctions.sh"
 
-
-#########################################
-# Main.
-
-# Convert the variable that has list of fixes to an array.
-# This list imported from "Common variables" file.
-IFS=$'\n'
-fixesArray=( $(printf 'FALSE \n%s\n' ${fixesList}) )
-unset IFS
-
-# Main zenity dialog.
-mainDialog () {
-  mainAction=$(
-  zenity --list --radiolist \
-    --title="What do you want to do?" \
-    --column=" " --column="Action" "${fixesArray[@]}"
-  )
-}
+# Main dialog.
+source "./functions/mainDialog.sh"
 
 
 #########################################
