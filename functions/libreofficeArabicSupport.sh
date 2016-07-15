@@ -6,10 +6,6 @@ libreofficeArabicSupport () {
   # A file has xml vales to enable RTL in LibreOffice.
   loArabicConfFile="./files/libreoffice-arabic-config.conf"
 
-  if $(grep -q "DefaultLocale_CTL" "${loUserConfFile}"); then
-    showZenityDialog "info" "Nothing to do" "RTL is already enabled in LibreOffice!"
-
-  else
     # Key value array is only available in Bash +4.0
     declare -A arabicLocaleArray
     
@@ -43,8 +39,15 @@ libreofficeArabicSupport () {
     # Add Arabic settings that enables RTL into LibreOffice user config file.
     # Could be better but it needs to take care of characters that should be escaped.
     echo "${loArabicConfig}" | while read line; do
-      sed -r -i "s#(</oor:items>)#${line}\n\1#g" "${loUserConfFile}" 
+
+      # Extract the value of LibreOffice config by regex.
+      configItem=$(grep -o -P "(?<=name=\")(\w+)" <<< "${line}")
+
+      # If config value is already there, then it will not add it again.
+      if ! $(grep -q "${configItem}" "${loUserConfFile}"); then
+        sed -r -i "s#(</oor:items>)#${line}\n\1#g" "${loUserConfFile}" 
+      fi
     done
 
-  fi
+    showZenityDialog "info" "Done!" "RTL configuration has been updated."
 }
