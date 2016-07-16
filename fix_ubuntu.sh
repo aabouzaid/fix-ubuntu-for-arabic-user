@@ -36,6 +36,9 @@ source "./functions/fixLamAlefConnect.sh"
 # Add WINDOWS-1256 to gedit encoding.
 source "./functions/setGeditArabicEncoding.sh"
 
+# Set Totem default encoding to WINDOWS-1256.
+source "./functions/setTotemEncoding.sh"
+
 
 #---------------------------------------#
 # Run.
@@ -64,6 +67,9 @@ do
     ;;
     "${setGeditArabicEncoding}")
       setGeditArabicEncoding
+    ;;
+    "${setTotemEncoding}")
+      setTotemEncoding
     ;;
     *)
       if [[ $? = -1 ]]; then

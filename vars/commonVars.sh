@@ -7,7 +7,7 @@ setSystemArabicFont="Set default system Arabic font."
 setFirefoxArabicFont="Set default Firefox Arabic font."
 fixLamAlefConnect="Fix Lam-Alef connecting issue."
 setGeditArabicEncoding="Set gedit default Arabic encoding."
-totemArabicEncoding="Set Totem default Arabic encoding."
+setTotemEncoding="Set Totem default encoding."
 libreofficeArabicSupport="Enable RTL in LibreOffice."
 moreUsefulPackges="Install useful packges."
 
@@ -16,6 +16,6 @@ fixesList="${setSystemArabicFont}
 ${setFirefoxArabicFont}
 ${fixLamAlefConnect}
 ${setGeditArabicEncoding}
-${totemArabicEncoding}
+${setTotemEncoding}
 ${libreofficeArabicSupport}
 ${moreUsefulPackges}"
