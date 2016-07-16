@@ -33,6 +33,9 @@ source "./functions/libreofficeArabicSupport.sh"
 # Fix Lam-Alef connecting issue.
 source "./functions/fixLamAlefConnect.sh"
 
+# Add WINDOWS-1256 to gedit encoding.
+source "./functions/setGeditArabicEncoding.sh"
+
 
 #---------------------------------------#
 # Run.
@@ -58,6 +61,9 @@ do
     ;;
     "${fixLamAlefConnect}")
       fixLamAlefConnect
+    ;;
+    "${setGeditArabicEncoding}")
+      setGeditArabicEncoding
     ;;
     *)
       if [[ $? = -1 ]]; then
