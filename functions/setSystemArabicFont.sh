@@ -1,12 +1,13 @@
 setSystemArabicFont () {
-  selectedArabicFont=$(selectArabicFont ${recommendedArabicFont})
-  if [[ -z ${selectedArabicFont} ]]; then
+  systemFontMessage="Please select Arabic font for system."
+  systemArabicFont=$(selectArabicFont "${systemFontMessage}" "${recommendedArabicFont}")
+  if [[ -z ${systemArabicFont} ]]; then
     return
   else
     xmlArabicFile="69-language-selector-ar.conf"
     xmlArabicPath="/etc/fonts/conf.avail/${xmlArabicFile}"
     copyConfigFile () {
-      runSudo sed "s/SELECTED_ARABIC_FILE/${selectedArabicFont}/g" "./files/${xmlArabicFile}" > ${xmlArabicPath}
+      runSudo sed "s/SELECTED_ARABIC_FILE/${systemArabicFont}/g" "./files/${xmlArabicFile}" > ${xmlArabicPath}
       runSudo ln -sf "${xmlArabicPath}" "/etc/fonts/conf.d/${xmlArabicFile}"
     }
 
