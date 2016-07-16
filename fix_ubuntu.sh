@@ -38,12 +38,6 @@ source "./functions/fixLamAlefConnect.sh"
 # Run.
 #---------------------------------------#
 
-# Run sudo for first time.
-if ! $(runSudo true); then
-  showZenityDialog "error" "" "Sorry, this script needs sudo access!"
-  exit 1
-fi
-
 # Loop over available options till the loop is borken.
 # Exit status of cancel button in "zenity" is 1 which breaks while loop.
 while :
