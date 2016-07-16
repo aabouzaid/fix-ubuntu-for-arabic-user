@@ -17,7 +17,8 @@ mainDialog () {
   # Main zenity dialog.
   mainAction=$(
     zenity --list --width=${mainDialogWidth} --height=${mainDialogHeight} \
-      --title="What do you want to do?" \
+      --title="Fix Ubuntu" \
+      --text="What do you want to do?" \
       --column="Action" "${fixesArray[@]}"
   )
 }
