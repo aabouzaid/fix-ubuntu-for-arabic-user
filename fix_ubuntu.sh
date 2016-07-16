@@ -44,17 +44,20 @@ while :
 do
   # Run main dialog. 
   mainDialog
-  
+
   # Checking user's choice.
   case "${mainAction}" in
-    "Set default system Arabic font.")
+    "${setSystemArabicFont}")
       setSystemArabicFont
+    ;;
+    "${setFirefoxArabicFont}")
+      setFirefoxArabicFont
     ;;
     "${libreofficeArabicSupport}")
       libreofficeArabicSupport
     ;;
-    "${setFirefoxArabicFont}")
-      setFirefoxArabicFont
+    "${fixLamAlefConnect}")
+      fixLamAlefConnect
     ;;
     *)
       if [[ $? = -1 ]]; then
