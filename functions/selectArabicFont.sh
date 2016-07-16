@@ -1,19 +1,18 @@
 # Select an Arabic from system.
 selectArabicFont () {
+  # Defaults.
+  selectFontTitle="Select an Arabic font"
+  selectFontMessage="Please a font from the list:"
+  defaultArabicFont="KacstOne"
 
-  # Use 1st parameter as a dialog message.
-  if [[ -x ${1} ]]; then
-    selectFontMessage="${1}"
-  else
-    selectFontMessage="Please select an Arabic font."
-  fi
+  # Use 1st parameter as a dialog title.
+  if [[ -n ${1} ]]; then selectFontTitle="${1}"; fi
 
-  # Use 2nd parameter as a default font.
-  if [[ -x ${2} ]]; then
-    defaultArabicFont="${2}"
-  else
-    defaultArabicFont="KacstOne"
-  fi
+  # Use 2st parameter as a dialog message.
+  if [[ -n ${2} ]]; then selectFontMessage="${2}"; fi
+
+  # Use 3nd parameter as a default font.
+  if [[ -n ${3} ]]; then defaultArabicFont="${3}"; fi
 
   # Get list of Arabic fonts on the system.
   fontsList=$(fc-list :lang=ar family | sort | awk '{printf("%s;", $0)}')
@@ -22,5 +21,5 @@ selectArabicFont () {
   unset IFS
 
   # Ask user to select one of Arabic fonts.
-  zenity --entry --title "" --entry-text "${fontsListArray[@]}" --text "${selectFontMessage}"
+  zenity --entry --title "${selectFontTitle}" --entry-text "${fontsListArray[@]}" --text "${selectFontMessage}"
 }
