@@ -3,7 +3,7 @@ mainDialog () {
   # Convert list of fixes variable to an array.
   # This list imported from "commonVars.sh" file.
   IFS=$'\n'
-  fixesArray=( $(printf 'FALSE \n%s\n' ${fixesList}) )
+  fixesArray=( $(printf '%s\n' ${fixesList}) )
   unset IFS
   
   # Set main dialog width based on max width of itmes in the fixes list.
@@ -16,8 +16,8 @@ mainDialog () {
   
   # Main zenity dialog.
   mainAction=$(
-    zenity --list --radiolist --width=${mainDialogWidth} --height=${mainDialogHeight} \
+    zenity --list --width=${mainDialogWidth} --height=${mainDialogHeight} \
       --title="What do you want to do?" \
-      --column="  #  " --column="Action" "${fixesArray[@]}"
+      --column="Action" "${fixesArray[@]}"
   )
 }
