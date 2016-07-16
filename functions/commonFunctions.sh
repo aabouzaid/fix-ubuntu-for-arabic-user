@@ -17,7 +17,7 @@ showZenityDialog () {
 }
 
 # Check exit status and return message in the case of success or fails.
-check_exit_status () {
+checkExitStatus () {
     runCmd=${1}
   if [[ $? = 0 ]]; then
     showZenityDialog "info" "" "Done!"
