@@ -24,6 +24,9 @@ source "./functions/selectArabicFont.sh"
 # Set system default Arabic font.
 source "./functions/setSystemArabicFont.sh"
 
+# Set Firefox default Arabic font.
+source "./functions/setFirefoxArabicFont.sh"
+
 # Enable RTL in LibreOffice and set Arabic locale.
 source "./functions/libreofficeArabicSupport.sh"
 
@@ -55,6 +58,9 @@ do
     ;;
     "${libreofficeArabicSupport}")
       libreofficeArabicSupport
+    ;;
+    "${setFirefoxArabicFont}")
+      setFirefoxArabicFont
     ;;
     *)
       if [[ $? = -1 ]]; then
