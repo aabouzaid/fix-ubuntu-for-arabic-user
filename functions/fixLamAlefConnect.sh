@@ -1,5 +1,5 @@
 # Fix Lam-Alef connecting issue by change input method.
-fixLamAlefIssue () {
+fixLamAlefConnect () {
   runSudo im-config -n xim
   checkExitStatus
 }
