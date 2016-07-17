@@ -1,4 +1,5 @@
 # General.
+appTitle="Fix Ubuntu"
 logsFile="./fix-ubuntu.log"
 recommendedArabicFont="KacstOne"
 
