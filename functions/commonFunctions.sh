@@ -37,7 +37,7 @@ checkExitStatus () {
     --errors-only|-e)
       # Don't print success message. To be used inside loops.
       if [[ ${exitStatus} -eq 0 ]]; then
-        contenue
+        continue
       elif [[ ${exitStatus} -eq 1 ]]; then
         printError
       else
@@ -68,8 +68,8 @@ checkExitStatus () {
 
 isEmpty () {
   if [[ -z "${1}" ]]; then
-    echo "Yes"
+    echo "Empty"
   else
-    echo "No"
+    echo "NotEmpty"
   fi
 }
