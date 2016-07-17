@@ -8,10 +8,10 @@ selectArabicFont () {
   # Use 1st parameter as a dialog title.
   if [[ -n ${1} ]]; then selectFontTitle="${1}"; fi
 
-  # Use 2st parameter as a dialog message.
+  # Use 2nd parameter as a dialog message.
   if [[ -n ${2} ]]; then selectFontMessage="${2}"; fi
 
-  # Use 3nd parameter as a default font.
+  # Use 3rd parameter as a default font.
   if [[ -n ${3} ]]; then defaultArabicFont="${3}"; fi
 
   # Get list of Arabic fonts on the system.

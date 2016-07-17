@@ -19,7 +19,7 @@ setSystemArabicFont () {
     if [[ ! -f "${xmlArabicPath}" ]]; then
       copyConfigFile
 
-    # If the file exists, the script will ask the user to overwite it or not.
+    # If the file exists, the script will ask the user to overwrite it or not.
     elif [[ -f "${xmlArabicPath}" ]]; then
       showZenityDialog "question" "File already exists." "The file \"${xmlArabicFile}\" already exists, do you like to overwite it?"
       if [[ $? -eq 0 ]]; then

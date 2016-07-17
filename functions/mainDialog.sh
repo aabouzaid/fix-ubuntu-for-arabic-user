@@ -6,11 +6,11 @@ mainDialog () {
   fixesArray=( $(printf '%s\n' ${fixesList}) )
   unset IFS
   
-  # Set main dialog width based on max width of itmes in the fixes list.
+  # Set main dialog width based on max width of items in the fixes list.
   itemsMaxWidth=$(wc -L <<< "${fixesList}")
   mainDialogWidth=$(((${itemsMaxWidth} * 4) + 200))
   
-  # Set main dialog height based on number of itmes in the fixes list.
+  # Set main dialog height based on number of items in the fixes list.
   itemsCount=$(wc -l <<< "${fixesList}")
   mainDialogHeight=$((${itemsCount} * 20 + 160))
   

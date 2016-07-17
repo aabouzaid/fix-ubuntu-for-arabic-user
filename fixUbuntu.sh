@@ -47,7 +47,7 @@ source "./functions/installUsefulPackages.sh"
 # Run.
 #---------------------------------------#
 
-# Loop over available options till the loop is borken.
+# Loop over available options till the loop is broken.
 # Exit status of cancel button in "zenity" is 1 which breaks while loop.
 while :
 do
