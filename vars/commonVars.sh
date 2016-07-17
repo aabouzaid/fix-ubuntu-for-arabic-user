@@ -11,11 +11,15 @@ setTotemEncoding="Set Totem default encoding."
 libreofficeArabicSupport="Enable RTL in LibreOffice."
 installUsefulPackages="Install useful packges."
 
-# List with all fixes will be converted later to an array.
-fixesList="${setSystemArabicFont}
-${setFirefoxArabicFont}
-${fixLamAlefConnect}
-${setGeditArabicEncoding}
-${setTotemEncoding}
-${libreofficeArabicSupport}
-${installUsefulPackages}"
+# List with all fixes that will be used in main dialog.
+IFS=$'\n'
+mainDialogList=(
+  FALSE "${setSystemArabicFont}"
+  FALSE "${setFirefoxArabicFont}"
+  FALSE "${fixLamAlefConnect}"
+  FALSE "${setGeditArabicEncoding}"
+  FALSE "${setTotemEncoding}"
+  FALSE "${libreofficeArabicSupport}"
+  FALSE "${installUsefulPackages}"
+)
+unset IFS
