@@ -39,6 +39,9 @@ source "./functions/setGeditArabicEncoding.sh"
 # Set Totem default encoding to WINDOWS-1256.
 source "./functions/setTotemEncoding.sh"
 
+# Some essential applications for every user.
+source "./functions/installUsefulPackages.sh"
+
 
 #---------------------------------------#
 # Run.
@@ -70,6 +73,9 @@ do
     ;;
     "${setTotemEncoding}")
       setTotemEncoding
+    ;;
+    "${installUsefulPackages}")
+      installUsefulPackages
     ;;
     *)
       if [[ $? = -1 ]]; then
