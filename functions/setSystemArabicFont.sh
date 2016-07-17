@@ -11,8 +11,14 @@ setSystemArabicFont () {
     xmlArabicPath="/etc/fonts/conf.avail/${xmlArabicFile}"
 
     copyConfigFile () {
-      runSudo sed "s/SELECTED_ARABIC_FILE/${systemArabicFont}/g" "./files/${xmlArabicFile}" > ${xmlArabicPath}
-      runSudo ln -sf "${xmlArabicPath}" "/etc/fonts/conf.d/${xmlArabicFile}"
+      if [[ $(runSudo true; echo $?) -eq 0 ]]; then
+        runSudo sed "s/SELECTED_ARABIC_FILE/${systemArabicFont}/g" "./files/${xmlArabicFile}" > ${xmlArabicPath}
+        checkExitStatus --errors-only
+        runSudo ln -sf "${xmlArabicPath}" "/etc/fonts/conf.d/${xmlArabicFile}"
+        checkExitStatus
+      else
+        setSystemArabicFont
+      fi
     }
 
     # If the file not exists, the script will copy it.
@@ -21,10 +27,9 @@ setSystemArabicFont () {
 
     # If the file exists, the script will ask the user to overwrite it or not.
     elif [[ -f "${xmlArabicPath}" ]]; then
-      showZenityDialog "question" "File already exists." "The file \"${xmlArabicFile}\" already exists, do you like to overwite it?"
-      if [[ $? -eq 0 ]]; then
+      alreadyExitsts=$(showZenityDialog "question" "File already exists." "The file \"${xmlArabicFile}\" already exists, do you like to overwite it?"; echo $?)
+      if [[ "${alreadyExitsts}" -eq 0 ]]; then
         copyConfigFile
-        checkExitStatus
       fi
     fi
   }
@@ -36,7 +41,7 @@ setSystemArabicFont () {
   if [[ -z "${systemArabicFont}" ]]; then
     showZenityDialog "question" "" "Please select <b>a font</b>!\t\nDo you want to retry?"
     if [[ $? -eq 0 ]]; then
-      selectSystemArabicFont
+      setSystemArabicFont
     else
       return
     fi

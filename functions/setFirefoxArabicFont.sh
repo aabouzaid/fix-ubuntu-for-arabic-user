@@ -1,12 +1,12 @@
 setFirefoxArabicFont () {
 
+  # Check if Firefox is opened, because Firefox overwrites settings file when it exits.
+  if [[ $(pgrep -c -u $(id -u) "firefox") -gt 0 ]]; then
+    showZenityDialog "warning" "" "<b>Firefox</b> is opened! Please close it first to perform this task!"
+    return
+  fi
+
   selectFirefoxArabicFont () {
-    # Check if Firefox is opened, because Firefox overwite settings file when it exits.
-    if [[ $(pgrep -c -u $(id -u) "firefox") -lt 0 ]]; then
-      showZenityDialog "warning" "" "<b>Firefox</b> is opened! Please close it first to perform this task!"
-      return
-    fi
-  
     # Select Sans Serif.
     firefoxSerifTitle="Select Firefox Arabic font"
     firefoxSerifMessage="Please select a font for (Serif).\t\t\nNote: If you don't know, just use first one.\t"
@@ -22,9 +22,9 @@ setFirefoxArabicFont () {
     #
     IFS=$'\n'
     firefoxArabicConfig=(
-      "user_pref(\"font.language.group\", \"ar\");"
-      "user_pref(\"font.name.serif.ar\", \"${firefoxSerifFont}\");"
-      "user_pref(\"font.name.sans-serif.ar\", \"${firefoxSansFont}\");"
+      user_pref\(\"font.language.group\",\"ar\"\)\;
+      user_pref\(\"font.name.serif.ar\",\"${firefoxSerifFont}\"\)\;
+      user_pref\(\"font.name.sans-serif.ar\",\"${firefoxSansfFont}\"\)\;
     )
     unset IFS
   
@@ -42,6 +42,7 @@ setFirefoxArabicFont () {
         # If config value is already there, then it will not add it again.
         if ! $(grep -q "${configItem}" "${firefoxUserPrefsFile}"); then
           echo "${configItem}" >> "${firefoxUserPrefsFile}"
+          checkExitStatus --errors-only
         fi
       done
     }
@@ -59,10 +60,12 @@ setFirefoxArabicFont () {
     # IF there is more than Firefox profile, it will ask user to select one to apply this fix. 
     if [[ ${#ffProfilesArray[@]} -gt 1 ]]; then
       selectProfileMessage="There are more then Firefox profile! Please select one."
-      selectedFirefoxProfile=$(zenity --list --title="What do you want to do?" --column="Action" "${ffProfilesArray[@]}")
-      profileDirectory=$(echo "${selectedFirefoxProfile}" | sed -r 's/.+\((.+)\)/\1/g')
-      updateFirefoxConf "${profileDirectory}"
-      checkExitStatus
+      selectedFirefoxProfile=$(zenity --list --title="Select Firefox profile" --column="Action" "${ffProfilesArray[@]}")
+      if [[ $(isEmpty "${selectedFirefoxProfile}") == "NotEmpty" ]]; then
+        profileDirectory=$(echo "${selectedFirefoxProfile}" | sed -r 's/.+\((.+)\)/\1/g')
+        updateFirefoxConf "${profileDirectory}"
+        checkExitStatus
+      fi	
     else
       profileDirectory=$(echo "${#ffProfilesArray[0]}" | sed -r 's/.+\((.+)\)/\1/g')
       updateFirefoxConf "${profileDirectory}"

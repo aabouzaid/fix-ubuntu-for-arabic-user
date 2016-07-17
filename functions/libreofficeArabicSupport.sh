@@ -46,8 +46,10 @@ libreofficeArabicSupport () {
     # If config value is already there, then it will not add it again.
     if ! $(grep -q "${configItem}" "${loUserConfFile}"); then
       sed -r -i "s#(</oor:items>)#${line}\n\1#g" "${loUserConfFile}" 
+      checkExitStatus --errors-only
     fi
   done
 
-  showZenityDialog "info" "Done!" "RTL configuration has been updated."
+
+  checkExitStatus
 }

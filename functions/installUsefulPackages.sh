@@ -33,8 +33,13 @@ installUsefulPackages () {
     return
   fi
 
-  # Install selected apps.
-  runSudo apt-get update
-  runSudo apt-get install -y ${selectedPackages}
-  checkExitStatus
+  # Install selected apps after asking for sudo access.
+  if [[ $(runSudo true) ]]; then 
+    runSudo apt-get update
+    checkExitStatus --errors-only
+    runSudo apt-get install -y ${selectedPackages}
+    checkExitStatus
+  else
+    installUsefulPackages
+  fi
 }
