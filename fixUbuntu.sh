@@ -78,12 +78,8 @@ do
       installUsefulPackages
     ;;
     *)
-      if [[ $? = -1 ]]; then
-        showZenityDialog "error" "" "Sorry! Unexpected error!"
-        break
-      else
-        break
-      fi
+      checkExitStatus --unexpected-only
+      break
     ;;
   esac
 done
