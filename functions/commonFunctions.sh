@@ -47,7 +47,7 @@ checkExitStatus () {
       ;;
     --unexpected-only|-u)
       # Don't check normal exit status.
-      if [[ ${exitStatus} -ne 0 ||  ${exitStatus} -ne 1 ]]; then
+      if [[ ${exitStatus} -ne 0 &&  ${exitStatus} -ne 1 ]]; then
         printUnexpectedError
       fi
       return
