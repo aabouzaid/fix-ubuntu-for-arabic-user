@@ -2,7 +2,7 @@ env:
   global:
   - SH_FILE=fixUbuntu.sh
   - BIN64_FILE=fixUbuntu64.sh.x
-  - SCH_FILE=shc-last.tar.gz
+  - SCH_FILE=shc-latest.tar.gz
 
 script:
   - wget https://github.com/neurobin/shc/archive/release.tar.gz -O $SCH_FILE
