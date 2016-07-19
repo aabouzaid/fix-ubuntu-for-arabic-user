@@ -1,4 +1,5 @@
 env:
+  global:
   - SH_FILE=fixUbuntu.sh
   - 64BIN_FILE=fixUbuntu64.sh.x
   - SCH_FILE=shc-last.tar.gz
