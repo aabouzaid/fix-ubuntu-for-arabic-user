@@ -4,7 +4,7 @@ before_install:
   - sudo apt-get install -y shc
 
 script:
-  - shc -r -T -f fixUbuntu.sh
+  - shc -r -f fixUbuntu.sh
   - mkdir sh
   - mv fixUbuntu.sh sh
   - rm fixUbuntu.sh.x.c
