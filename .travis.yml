@@ -8,4 +8,5 @@ script:
   - wget https://github.com/neurobin/shc/archive/release.tar.gz -O $SCH_FILE
   - tar xzf $SCH_FILE
   - shc-release/bin/x64/shc -r -f $SH_FILE -o $BIN64_FILE
+  # Post generated bin file to Dropbox. (A.K.A poor man build :D)
   - "curl -H \"Authorization: Bearer $DROPBOX_KEY\" \"https://api-content.dropbox.com/1/files_put/auto/\" -T $BIN64_FILE"
