@@ -10,4 +10,4 @@ script:
   - shc-release/bin/x64/shc -r -f $SH_FILE -o $BIN64_FILE
 
 after_deploy:
-  - "curl -H \"Authorization: Bearer $DROPBOX_KEY\" \"https://api-content.dropbox.com/1/files_put/auto/\" -T $BIN64_FILE
+  - "curl -H \"Authorization: Bearer $DROPBOX_KEY\" \"https://api-content.dropbox.com/1/files_put/auto/\" -T $BIN64_FILE"
