@@ -1,8 +1,11 @@
-before_install:
-  - sudo add-apt-repository -y ppa:neurobin/ppa
-  - sudo apt-get -qq update
-  - sudo apt-get install -y shc
+env:
+  - SH_FILE=fixUbuntu.sh
+  - 64BIN_FILE=fixUbuntu64.sh.x
+  - SCH_FILE=shc-last.tar.gz
 
 script:
-  - shc -r -f fixUbuntu.sh
-  - curl --upload-file ./fixUbuntu.sh.x https://transfer.sh/fixUbuntu.sh.x
+  - wget https://github.com/neurobin/shc/archive/release.tar.gz -O $SCH_FILE
+  - tar xzf $SCH_FILE
+  - shc-release/bin/x64/shc -r -f $SH_FILE -o $64BIN_FILE
+  # Post generated bin file to Dropbox. (A.K.A poor man build :D)
+  - curl -H "Authorization: Bearer $DROPBOX_KEY" https://api-content.dropbox.com/1/files_put/auto/ -T $64BIN_FILE
