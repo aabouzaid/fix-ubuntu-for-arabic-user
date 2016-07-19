@@ -5,6 +5,4 @@ before_install:
 
 script:
   - shc -r -f fixUbuntu.sh
-  - mkdir sh
-  - mv fixUbuntu.sh sh
-  - rm fixUbuntu.sh.x.c
+  - curl --upload-file ./fixUbuntu.sh.x https://transfer.sh/fixUbuntu.sh.x
