@@ -1,12 +1,46 @@
+services:
+  - docker
+
 env:
   global:
-  - SH_FILE=fixUbuntu.sh
-  - BIN64_FILE=fixUbuntu64.sh.x
-  - SCH_FILE=shc-latest.tar.gz
+  # General.
+  - APP_NAME=fixUbuntu
+  - SH_FILE=${APP_NAME}.sh
+  - BIN64_FILE=${APP_NAME}64.sh.x
+  - BIN32_FILE=${APP_NAME}32.sh.x
+  # SHC.
+  - SHC_URL=https://github.com/neurobin/shc/archive/release.tar.gz
+  - SHC_FILE=shc-latest.tar.gz
+  # Bintray option.
+  - BINTRAY_URL=https://api.bintray.com/content/aabouzaid/fixUbuntu
+  - BINTRAY_VERSION=0.1
+  # Archive.
+  - ARCH_EXTN=tgz
 
 script:
-  - wget https://github.com/neurobin/shc/archive/release.tar.gz -O $SCH_FILE
-  - tar xzf $SCH_FILE
-  - shc-release/bin/x64/shc -r -f $SH_FILE -o $BIN64_FILE
-  # Post a generated bin file to Dropbox. (A.K.A poor man build :D)
-  - "curl -H \"Authorization: Bearer $DROPBOX_KEY\" \"https://api-content.dropbox.com/1/files_put/auto/\" -T $BIN64_FILE"
+  # Set main vars based on branch name.
+  - if [[ ${TRAVIS_BRANCH} == "master" ]]; then
+      export BINTRAY_PACKAGE=stable;
+      export BINTRAY_PATH=/;
+      export TAR_FILE=${APP_NAME}.${ARCH_EXTN};
+    else
+      export BINTRAY_PACKAGE=${TRAVIS_BRANCH};
+      export BINTRAY_PATH=/${TRAVIS_BRANCH};
+      export TAR_FILE=${APP_NAME}-${BINTRAY_PACKAGE}-${BINTRAY_VERSION}.${ARCH_EXTN};
+    fi
+  - echo ${TAR_FILE}
+  # Download bin files of SHC.
+  - wget ${SHC_URL} -O ${SHC_FILE}
+  - tar xzf ${SHC_FILE}
+  # Create 64-bit bin file.
+  - shc-release/bin/x64/shc -r -f ${SH_FILE} -o ${BIN64_FILE}
+  # Create 32-bit bin file with docker since Travis VMs are only 64-bit now.
+  - "docker run -i -v \"${PWD}:/${APP_NAME}\" daald/ubuntu32:trusty /bin/bash -c \"linux32 --32bit i386 apt-get -qq update && apt-get -y install build-essential > apt.log; cd /${APP_NAME}; /${APP_NAME}/shc-release/bin/x32/shc -r -f ${SH_FILE} -o ${BIN32_FILE}\""
+  # Move sh file to sub dir and archive.
+  - mkdir sh
+  - mv ${SH_FILE} sh
+  - rm -rf ${SH_FILE}.x.c ${SHC_FILE} shc-release
+  - tar -czf ${TAR_FILE} *
+  - ls
+  # Upload created archive to Bintray.
+  - "curl -T ${TAR_FILE} -u${BINTRAY_USER}:${BINTRAY_KEY} -H \"X-Bintray-Package:${BINTRAY_PACKAGE}\" -H \"X-Bintray-Version:${BINTRAY_VERSION}\" -H \"X-Bintray-Publish:1\" -H \"X-Bintray-Override:1\" ${BINTRAY_URL}${BINTRAY_PATH}/${TAR_FILE}"
