@@ -12,7 +12,7 @@ env:
   - SHC_URL=https://github.com/neurobin/shc/archive/release.tar.gz
   - SHC_FILE=shc-latest.tar.gz
   # Bintray option.
-  - BINTRAY_URL=https://api.bintray.com/content/${BINTRAY_USER}/fixUbuntu
+  - BINTRAY_URL=https://api.bintray.com/content/${BINTRAY_USER}/${APP_NAME}
   - BINTRAY_VERSION=0.1
   # Archive.
   - ARCH_EXTN=tgz
