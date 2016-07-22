@@ -1,7 +1,7 @@
 fixUbuntu (for Arabic user)
 =========================================
 
-Few years ago (2013 maybe?) I did write some scripts to support new Arabic users as part of my -Arabic- book "[Simply Ubuntu](http://simplyubuntu.com/)".
+Few years ago (2013 maybe?) I did write some scripts to support new Arabic users as part of my -Arabic- book "[Simply Ubuntu](http://simplyubuntu.com/)".<br />
 I intended to rewrite these scripts in Python, but I never have time for that after the book was released.
 
 
@@ -10,13 +10,16 @@ So, what we have here is a small app (using Bash and Zenity) fixes certain issue
 
 Download it!
 ------------
-You can download latest stable version from official website for [Simply Ubuntu.](http://download.simplyubuntu.com/fixUbuntu-latest.tgz).
-Just download and extract it, then double click on the that file with ".sh.x" extension!
+You can download latest stable version from official website for [Simply Ubuntu.](http://download.simplyubuntu.com/fixUbuntu-latest.tgz).<br />
+Just download and extract it, then double click on that file with ".sh.x" extension!
 
 
 Screenshots.
 ------------
-
+Main window.
+<p align="center">
+<img src="https://1.bp.blogspot.com/-nOkQm9qMdUM/V5KLjbAfa-I/AAAAAAAACNM/G6Y9vFmBKnAkmjEbSD2GMCsYuRVgSYU6wCLcB/fixUbuntu-v.01.png" width="300">
+</p>
 
 How does it work?
 ------------------
@@ -34,7 +37,7 @@ What does it do?
 This app does the following:
 * Set system Arabic font since the default Arabic one is too ugly!
 * Set Firefox Arabic font because you will get ugly pages if you don't have MS fonts.
-* Fix Lam-Alef connecting issue (I don't know why people still use ["Lam" and "Alef"](http://graphemica.com/%EF%BB%BB) as "one" character! But it's here anyway!)
+* Fix Lam-Alef connecting issue (I don't know why people still use ["Lam" and "Alef"](http://graphemica.com/%EF%BB%BB) as "one" character! But it's here anyway!).
 * Set gedit default Arabic encoding because Windows OS is using WINDOWS-1256 instead UTF-8!
 * Set Totem default encoding ... the same as in gedit.
 * Enable RTL in LibreOffice which is not enabled by default.
@@ -51,7 +54,7 @@ To-do.
 * Add more fixes?
 * There is no logging yet.
 * Port the app to Python? (Most probably with new version of [Simply Ubuntu](http://simplyubuntu.com/) book).
-* And for sure translate it into Arabic!
+* And for sure translate the UI into Arabic!
 
 
 About.
