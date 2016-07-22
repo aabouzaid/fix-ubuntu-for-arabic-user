@@ -11,9 +11,9 @@ mainDialog () {
   # Main zenity dialog.
   mainAction=$(
     zenity --list --radiolist \
+      --title="${appTitle}" \
       --width=${mainDialogWidth} \
       --height=${mainDialogHeight} \
-      --title="${appTitle}" \
       --text="What do you want to do?" \
       --column=" # " --column="Action" "${mainDialogList[@]}"
   )
