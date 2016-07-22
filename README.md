@@ -10,7 +10,7 @@ So, what we have here is a small app (using Bash and Zenity) fixes certain issue
 
 Download it!
 ------------
-You can download latest stable version from official website for [Simply Ubuntu.](http://download.simplyubuntu.com/fixUbuntu-latest.tgz).<br />
+You can download latest stable version from official website for [Simply Ubuntu.](http://files.simplyubuntu.com/fixUbuntu-latest.tgz).<br />
 Just download and extract it, then double click on that file with ".sh.x" extension!
 
 
@@ -29,7 +29,7 @@ But since this app is actually for new end-users, and most of new people don't k
  
 So I used a fork of [SHC](https://github.com/neurobin/shc) (Shell Script Compiler) to convert that bash script to bin file and archive it to make it easy to use for new users!
 
-Bin files are build for 32-bit and 64-bit using [Travis CI](http://travis-ci.org/) and then it uploaded to official [Simply Ubuntu.](http://download.simplyubuntu.com/fixUbuntu-latest.tgz) website.
+Bin files are build for 32-bit and 64-bit using [Travis CI](http://travis-ci.org/) and then it uploaded to official [Simply Ubuntu.](http://files.simplyubuntu.com/fixUbuntu-latest.tgz) website.
 
 
 What does it do?
