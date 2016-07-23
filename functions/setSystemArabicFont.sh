@@ -12,8 +12,7 @@ setSystemArabicFont () {
 
     copyConfigFile () {
       if [[ $(runSudo true; echo $?) -eq 0 ]]; then
-        runSudo sed "s/SELECTED_ARABIC_FILE/${systemArabicFont}/g" "./files/${xmlArabicFile}" > ${xmlArabicPath}
-        checkExitStatus --errors-only
+        sed "s/SELECTED_ARABIC_FILE/${systemArabicFont}/g" "./files/${xmlArabicFile}" | runSudo tee ${xmlArabicPath} &&
         runSudo ln -sf "${xmlArabicPath}" "/etc/fonts/conf.d/${xmlArabicFile}"
         checkExitStatus
       else
